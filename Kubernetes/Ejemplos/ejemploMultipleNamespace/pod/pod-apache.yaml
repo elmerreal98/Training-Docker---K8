@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-apache
+  namespace: cursok8
+  labels:
+    app: web
+    creador: elmerreal
+spec:
+  containers:
+  - name: container-apache
+    image: httpd
+    ports:
+    - containerPort: 80

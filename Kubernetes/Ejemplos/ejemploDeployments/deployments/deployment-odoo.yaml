@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-odoo
+spec:
+  selector:
+    matchLabels:
+      app: odoo
+  template:
+    metadata:
+      labels:
+        app: odoo
+    spec:
+      containers:
+      - name: odoo-container
+        image: odoo
+        ports:
+        - containerPort: 8069
+        env:
+        - name: HOST
+          valueFrom:
+            configMapKeyRef:
+              name: bd-configmap
+              key: enlace_bd
+        - name: USER
+          valueFrom:
+            secretKeyRef:
+              name: secrets-db
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secrets-db
+              key: password
